@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Recipes</title>
+</head>
+<body>
+    <div class="d-flex justify-content-around">
+
+
+            <form action="/register" method="POST" class="col-4 bg-light my-5 p-4 text-dark">
+                <h2 class="text-start text-primary">Register</h2><br><br>
+                First Name<br>
+                <input type="text" name="first_name"><br><br>
+                Last Name<br>
+                <input type="text" name="last_name"><br><br>
+                Email<br>
+                <input type="text" name="email"><br><br>
+                Password<br>
+                <input type="password" name="password"><br><br>
+                Confirm Password<br>
+                <input type="password" name="confirm_password"><br><br>
+                <input type="submit" value="Register" class="btn btn-primary btn-outline-dark text-light">
+            </form>
+            
+            <form action="/login" method="POST" class="col-4 bg-light my-5 p-4 text-dark">
+                <h2 class="text-start text-primary">Login</h2><br><br>
+                Email<br>
+                <input type="text" name="email"><br><br>
+                Password<br>
+                <input type="password" name="password"><br><br>
+                <input type="submit" value="Login" class="btn btn-primary btn-outline-dark text-light">
+            </form>
+    </div>
+    <div class="text-center">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p style="color:red">{{message}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    </div>
+</body>
+</html>
