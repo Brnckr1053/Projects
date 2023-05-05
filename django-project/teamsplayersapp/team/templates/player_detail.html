@@ -1,0 +1,24 @@
+<!-- player_detail.html -->
+{% extends 'registration/base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="card shadow">
+        <div class="card-body">
+            <h1 class="card-title">{{ player.first_name }} {{ player.last_name }}</h1>
+            <hr>
+            <h4 class="card-subtitle mb-3 text-muted">Teams:</h4>
+            {% if player.teams.all %}
+            <ul>
+                {% for team in player.teams.all %}
+                <li><a href="{% url 'team_detail' team.id %}">{{ team.city }} {{ team.mascot }}</a></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p class="card-text">This player is not currently on any teams.</p>
+            {% endif %}
+            
+        </div>
+        </div>
+    </div>
+{% endblock %}

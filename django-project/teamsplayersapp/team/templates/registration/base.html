@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Team Tracker</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    {% load static %}
+    <link rel="icon" href="./static/images/ETE.ico" aria-multiline="">
+</head>
+
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    
+            
+            
+            <a class="navbar-brand" href="#">
+                {% load static %}
+                <img src="{% static 'ETE.png' %}" alt="Logo">
+
+                Team Tracker
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item {% if request.path == '/' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'team_list' %}">Home</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item {% if 'team' in request.path %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'team_list' %}">Teams</a>
+                    </li>
+                    <li class="nav-item {% if 'team' in request.path %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'team_create' %}">Create Team</a>
+                    </li>
+                    <li class="nav-item {% if 'player' in request.path %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'player_create' %}">Create Player</a>
+                    </li>
+                    {% endif %}
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <span class="navbar-text mr-3">{{ user.email }}</span>
+                    </li>
+                    <li class="nav-item">
+                        <form action="{% url 'logout' %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-link">Logout</button>
+                        </form>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://127.0.0.1:8000/admin/login/?next=/admin//admin">Admin Login</a>
+                    </li>
+                    <li class="nav-item {% if 'login' in request.path %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container mt-3">
+        {% block content %}
+        {% endblock %}
+        </div>
+        
+        {% if user.is_authenticated %}
+        <p>Welcome, {{ user.email }}</p>
+        
+        {% endif %}
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    </body>
+</html>

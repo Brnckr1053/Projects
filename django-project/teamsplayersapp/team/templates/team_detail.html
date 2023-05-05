@@ -1,0 +1,22 @@
+<!-- team_detail.html -->
+{% extends 'registration/base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="card shadow">
+        <div class="card-body">
+            <h1 class="card-title">{{ team.city }} {{ team.mascot }}</h1>
+            <hr>
+            <h4 class="card-subtitle mb-3 text-muted">Players:</h4>
+            
+            <ul>
+                {% for player in team.player_set.all %}
+                <li><a href="{% url 'player_detail' pk=player.pk %}">{{ player.first_name }} {{ player.last_name }}</a></li>
+                {% endfor %}
+            </ul>
+            
+            
+        </div>
+        </div>
+    </div>
+{% endblock %}
